@@ -44,14 +44,14 @@
         };
       in {
         default = env.env.overrideAttrs (old: {
-          buildIputs = [(pkgs.poetry.overrideAttrs {python = python;})];
+          buildInputs = [(pkgs.poetry.overrideAttrs {python = python;})];
           # NIX_LD_LIBRARY_PATH =
           #   lib.makeLibraryPath [
           #   ];
           # NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
         });
         poetry = pkgs.mkShell {
-          buildIputs = [pkgs.poetry.override {python = python;}];
+          buildInputs = [pkgs.poetry.override {python = python;}];
         };
       };
     });

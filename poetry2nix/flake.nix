@@ -50,9 +50,6 @@
           #   ];
           # NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
         });
-        poetry = pkgs.mkShell {
-          buildInputs = [pkgs.poetry.override {python = python;}];
-        };
       };
     });
 }

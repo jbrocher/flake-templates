@@ -12,6 +12,16 @@
       '';
     };
 
+    templates.pyproject2nix = {
+      path = ./pyproject2nix;
+      description = "pyproject.nix template with poetry";
+      welcomeText = ''
+        This flake use pyproject.toml to create a nix python env from
+        the nixpkgs package set. The lock file is ignored. Suitable
+        for dev env
+      '';
+    };
+
     templates.default = self.templates.poetry2nix;
   };
 }

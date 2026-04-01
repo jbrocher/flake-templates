@@ -1,0 +1,7 @@
+#direnv
+.direnv
+
+#codex
+.codex/*
+!.codex/config.toml
+

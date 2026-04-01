@@ -1,0 +1,11 @@
+[feature]
+web_search_request = true
+
+[toosl]
+web_search=true
+
+[mcp_servers.context7]
+args = ["-y", "@upstash/context7-mcp"]
+env_vars = ["CONTEXT7_API_KEY"]
+command = "npx"
+startup_timeout_ms = 20_000

@@ -1,0 +1,26 @@
+# These rules apply only to trusted projects. Keep allowed prefixes narrow:
+# any extra arguments after a matching prefix are also allowed.
+
+prefix_rule(
+    pattern = ["git", "status", "--short"],
+    decision = "allow",
+    justification = "Read the working tree status without prompting.",
+    match = ["git status --short"],
+    not_match = ["git status", "git add --all"],
+)
+
+prefix_rule(
+    pattern = ["git", "log", "-1", "--oneline"],
+    decision = "allow",
+    justification = "Read the latest commit summary without prompting.",
+    match = ["git log -1 --oneline"],
+    not_match = ["git log", "git commit -m example"],
+)
+
+prefix_rule(
+    pattern = ["nix", "--version"],
+    decision = "allow",
+    justification = "Read the installed Nix version without prompting.",
+    match = ["nix --version"],
+    not_match = ["nix flake update"],
+)

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -ne 2 ]]; then
+  printf 'Usage: %s <skill-name> <description>\n' "$0" >&2
+  exit 2
+fi
+
+name=$1
+description=$2
+
+if [[ ! $name =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+  printf 'Skill name must use lowercase letters, digits, and single hyphens.\n' >&2
+  exit 2
+fi
+
+if [[ -z $description || $description == *$'\n'* || $description == *$'\r'* ]]; then
+  printf 'Description must be a single non-empty line.\n' >&2
+  exit 2
+fi
+
+repo_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+skill_dir=$repo_root/.agents/skills/$name
+mkdir -p -- "$repo_root/.agents/skills"
+
+if ! mkdir -- "$skill_dir" 2>/dev/null; then
+  printf 'Skill already exists or cannot be created: %s\n' "$skill_dir" >&2
+  exit 1
+fi
+
+cat > "$skill_dir/SKILL.md" <<EOF
+---
+name: $name
+description: |-
+  $description
+---
+
+# $name
+
+Describe when to use this skill and the steps to follow.
+EOF
+
+printf 'Created %s\n' "$skill_dir/SKILL.md"

@@ -29,6 +29,15 @@
         description = "A poetry project with a nix-provide poetry and a poetry managed env";
       };
 
+      templates.base = {
+        path = ./base;
+        description = "Node development shell with direnv and Codex project setup";
+        welcomeText = ''
+          Run nix flake lock, then direnv allow (with nix-direnv installed).
+          See README.md for skill, MCP, and Codex rules setup.
+        '';
+      };
+
       templates.default = self.templates.poetry2nix;
     };
 }
